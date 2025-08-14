@@ -1,6 +1,7 @@
 package controller;
 
 import model.Account;
+import model.dto.TransferRequest;
 import model.service.AccountService;
 import view.AccountView;
 
@@ -25,5 +26,22 @@ public class AccountController {
             throw new RuntimeException(e);
         }
 
+    }
+
+    public void findAccountById() {
+        Integer id = view.showEnterId();
+        Account account = service.findById(id);
+        view.showAccountDetails(account);
+    }
+
+    public void transferMoney() {
+        TransferRequest request = view.showTransferRequest();
+        service.transferMoney(request);
+    }
+
+    public void showTransactionRecords() {
+        view.showTransactionRecord(
+                service.getTransactions()
+        );
     }
 }
